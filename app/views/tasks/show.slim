@@ -1,0 +1,9 @@
+h1
+  | Task Show Page
+p
+  | Title: 
+  = @task['title']
+p
+  | Description: 
+  = @task['description']
+= link_to "Back To Task List",tasks_path

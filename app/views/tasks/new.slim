@@ -1,0 +1,12 @@
+h1
+  | Create a New Task
+= form_for @task do |f|
+  = label_tag(:title, "Title:")
+  = f.text_field :title
+  = label_tag(:description, "Description")
+  = f.text_area :description
+  = label_tag(:state, "State:")
+  = f.number_field :state
+  = f.submit "Create"
+
+  = link_to "Back To Task List",tasks_path
