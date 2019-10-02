@@ -16,6 +16,8 @@ table.table.table-striped.table-hover
       th
         = link_to "Title", :sort => "Title"
       th
+        = link_to "State", :sort => "State"
+      th
         | Action 1
       th
         | Action 2
@@ -23,6 +25,8 @@ table.table.table-striped.table-hover
     tr
       td
         = link_to task.title, task_path(task.id)
+      td
+        = task.state
       td
         = link_to "edit", edit_task_path(task[:id])
       td

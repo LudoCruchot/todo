@@ -6,5 +6,10 @@
 
   <%= label_tag(:description, "Description") %> 
   <%= f.text_area :description %></br>
+  
+
+  <%= label_tag(:state, "State:") %>
+  <%= f.number_field :state %></br>
+
   <%= f.submit "Create" %>
 <% end %>
