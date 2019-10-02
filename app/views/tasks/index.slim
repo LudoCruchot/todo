@@ -1,0 +1,29 @@
+nav.navbar.navbar-light.bg-light
+  a.navbar-brand[href="/"]
+    | Our Logo
+  form.form-inline
+    button.btn.btn-outline-primary[type="button"]
+      | Main button
+    div[style="padding-left: 10px;"]
+      button.btn.btn-outline-success[type="button"]
+        | Second button
+= link_to "New Task Item", new_task_path
+h1
+  | Tasks
+table.table.table-striped.table-hover
+  thead
+    tr.table-primary
+      th
+        = link_to "Title", :sort => "Title"
+      th
+        | Action 1
+      th
+        | Action 2
+  - @tasks.each do |task|
+    tr
+      td
+        = link_to task.title, task_path(task.id)
+      td
+        = link_to "edit", edit_task_path(task[:id])
+      td
+        = link_to "delete", task, method: :delete, data: { confirm: "Are you sure?" }
