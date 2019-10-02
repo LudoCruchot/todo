@@ -1,6 +1,19 @@
 class TasksController < ApplicationController
     def index
-        @tasks = Task.order(params[:sort])
+        @state = params[:state]
+        @sort = params[:sort]
+
+        @tasks = Task.all
+
+        @tasks = @tasks.where(state: params[:state]) if params[:state].present?
+        @tasks = @tasks.order("#{params[:sort]} asc") if params[:sort].present?
+        
+        #@tasks = Task.order(params[:sort])
+
+        #if params[:state].nil? == false
+        #    @tasks = Task.where(state: "#{@state}").order(params[:sort])
+        #end
+        
     end
 
     def show
