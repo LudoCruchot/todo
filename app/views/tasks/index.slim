@@ -1,49 +1,43 @@
 .col-xs-12
-  h1.mt-0.pull-right= "Tasks"
+  h1.text-center = "Tasks manager"
 
-nav.navbar.navbar-light.bg-light
-  a.navbar-brand[href="/"]
-    | Our Logo
-  form.form-inline
-    button.btn.btn-outline-primary[type="button"]
-      | Main button
-    div[style="padding-left: 10px;"]
-      button.btn.btn-outline-success[type="button"]
-        | Secondary Button
+.col-xs-12
+  ul.nav.nav-tabs
+    - if @state.nil?
+      li class=("nav-item active") = link_to "All", root_path
+    - else
+      li class=("nav-item") = link_to "All", root_path
 
-= link_to "New Task Item", new_task_path
+    - if @state == "0"
+      li class=("nav-item active") = link_to "To do", root_path(state: 0)
+    - else
+      li class=("nav-item") = link_to "To do", root_path(state: 0)
 
-.col-sm-12
-  .row
-    .col-xs-12
-      ul.nav.nav-pills
-        li class=('nav-item')
-          = link_to "Ongoing", root_path(state: 0)
-        li class=('nav-item')
-          = link_to "Finished", root_path(state: 1)
-        li class=('nav-item')
-          = link_to "All", root_path
-
-
+    - if @state == "1"
+      li class=("nav-item active") = link_to "Done", root_path(state: 1)
+    - else
+      li class=("nav-item") = link_to "Done", root_path(state: 1)
+          
 table.table.table-striped.table-hover
   thead
     tr.table-primary
+      th = link_to "Title", :sort => "title", :state => @state
+      th = link_to "State", :sort => "state", :state => @state
       th
-        = link_to "Title", :sort => "title", :state => @state
       th
-        = link_to "State", :sort => "state", :state => @state
-      th
-        | Action 1
-      th
-        | Action 2
   - @tasks.each do |task|
-    tr
-      td
-        = link_to task.title, task_path(task.id)
-      td
-        = task.state
-      td
-        = link_to "edit", edit_task_path(task[:id])
-      td
-        = link_to "delete", task, method: :delete, data: { confirm: "Are you sure?" }
+    - if task.state == 1 && @state != "1"
+      tr.success
+        td = link_to task.title, task_path(task.id)
+        td = task.state
+        td = link_to "edit", edit_task_path(task[:id])
+        td = link_to "delete", task, method: :delete, data: { confirm: "Are you sure?" }
+    - else
+      tr
+        td = link_to task.title, task_path(task.id)
+        td = task.state
+        td = link_to "edit", edit_task_path(task[:id])
+        td = link_to "delete", task, method: :delete, data: { confirm: "Are you sure?" }
+
+= link_to "New Task Item", new_task_path, class: 'btn btn-primary'
 
