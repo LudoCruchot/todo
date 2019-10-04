@@ -1,3 +1,6 @@
+.col-xs-12
+  h1.mt-0.pull-right= "Tasks"
+
 nav.navbar.navbar-light.bg-light
   a.navbar-brand[href="/"]
     | Our Logo
@@ -6,18 +9,21 @@ nav.navbar.navbar-light.bg-light
       | Main button
     div[style="padding-left: 10px;"]
       button.btn.btn-outline-success[type="button"]
-        | Second button
-= link_to "New Task Item", new_task_path
-h1
-  | Tasks
+        | Secondary Button
 
-ul.nav.nav-pills
-  li
-    = link_to "Ongoing", root_path(state: 0)
-  li
-    = link_to "Finished", root_path(state: 1)
-  li
-    = link_to "All", root_path
+= link_to "New Task Item", new_task_path
+
+.col-sm-12
+  .row
+    .col-xs-12
+      ul.nav.nav-pills
+        li class=('nav-item')
+          = link_to "Ongoing", root_path(state: 0)
+        li class=('nav-item')
+          = link_to "Finished", root_path(state: 1)
+        li class=('nav-item')
+          = link_to "All", root_path
+
 
 table.table.table-striped.table-hover
   thead
@@ -40,3 +46,4 @@ table.table.table-striped.table-hover
         = link_to "edit", edit_task_path(task[:id])
       td
         = link_to "delete", task, method: :delete, data: { confirm: "Are you sure?" }
+
